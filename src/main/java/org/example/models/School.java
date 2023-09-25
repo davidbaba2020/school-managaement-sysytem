@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class School {
     private String name;
-    private  static List<Student> studentInThisSchool;
-    private  static List<Staff> staffInThisSchool;
-    private static List<Subjects> subjectsThisSchool;
+    private List<Student> studentInThisSchool;
+    private List<Staff> staffInThisSchool;
+    private List<Subjects> subjectsThisSchool;
 }

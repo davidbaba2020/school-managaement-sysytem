@@ -1,5 +1,6 @@
 package org.example.models;
 
+import jakarta.persistence.MappedSuperclass;
 import lombok.*;
 import org.example.enums.GENDER;
 import org.example.enums.ROLE;
@@ -9,6 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
+@MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
 public abstract class BaseClass {

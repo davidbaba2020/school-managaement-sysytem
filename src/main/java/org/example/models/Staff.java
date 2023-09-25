@@ -6,7 +6,9 @@ import org.example.enums.ROLE;
 import org.example.exceptions.UnauthorizedException;
 import org.example.service.AdminInterface;
 
+import java.beans.Beans;
 import java.util.HashMap;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,8 +20,9 @@ public class Staff extends BaseClass implements AdminInterface {
     private CATEGORY category;
 
     @Override
-    public ReportSheet admissionProcessing(Applicant applicant, double cutOffMark) {
-        School school = new School();
+    public ReportSheet admissionProcessing(Applicant applicant, double cutOffMark, School school) {
+
+        List<Student> schoolStudentList = school.getStudentInThisSchool();
 
         ReportSheet reportSheet = new ReportSheet();
                     reportSheet.setName(applicant.getName());
@@ -34,12 +37,20 @@ public class Staff extends BaseClass implements AdminInterface {
         //2.
         double applicantsAverageScore = applicant.getAverageEntranceScore();
         if(applicantsAverageScore < cutOffMark) {
+            //3.
             reportSheet.setTeachersRemark("Sorry you did not make it, try again latter");
-            reportSheet.setStudentLevel("");
+            reportSheet.setStudentLevel("NOT ADMITTED");
         }
             reportSheet.setTeachersRemark("Congratulations!!! You have been place in "+ "Glade ...");
-            reportSheet.setStudentLevel("");
+            reportSheet.setStudentLevel("You have been admitted to "+applicant.getLevelAppliedFor());
 
+            //4.
+            Student newStudent = new Student();
+                    newStudent.setName(applicant.getName());
+                    newStudent.setAge(applicant.getAge());
+                    newStudent.setGender(applicant.getGender());
+
+            schoolStudentList.add(newStudent);
 
         return reportSheet;
     }
